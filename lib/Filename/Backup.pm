@@ -64,6 +64,12 @@ sub check_backup_filename {
     my %args = @_;
 
     my $filename = $args{filename};
+    my $orig_filename;
+
+    if ($filename =~ /\A#(.+)#\z/) {
+        $orig_filename = $1;
+        goto RETURN;
+    }
 
     $filename =~ /(~|\.\w+)\z/ or return 0;
     my $ci = $args{ci} // 1;
@@ -84,8 +90,9 @@ sub check_backup_filename {
     }
     return 0 unless $spec;
 
-    (my $orig_filename = $filename) =~ s/\Q$suffix\E\z//;
+    ($orig_filename = $filename) =~ s/\Q$suffix\E\z//;
 
+  RETURN:
     return {
         original_filename => $orig_filename,
     };
