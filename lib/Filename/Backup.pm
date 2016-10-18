@@ -14,11 +14,16 @@ our @EXPORT_OK = qw(check_backup_filename);
 our %SPEC;
 
 our %SUFFIXES = (
-    '~'    => 1,
-    '.bak' => 1,
-    '.old' => 1,
+    '~'     => 1,
+    '.bak'  => 1,
+    '.old'  => 1,
+    '.orig' => 1, # patch
+    '.rej'  => 1, # patch
+    '.swp'  => 1,
     # XXX % (from /etc/mime.types)
     # XXX sik? (from /etc/mime.types)
+    # XXX .dpkg*
+    # XXX .rpm*
 );
 
 $SPEC{check_backup_filename} = {
